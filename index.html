@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sun Shine Coaching Academy - Portal</title>
+    <style>
+        /* CSS FOR STYLE - NO INTERNET REQUIRED */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #fbbf24;
+            font-size: 12px;
+        }
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        .input-box label {
+            display: block;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #334155;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn {
+            width: 100%;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border: 2px solid #1e3a8a;
+            border-radius: 8px;
+            background: #f8fafc;
+            display: none;
+        }
+
+        .student-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0f172a;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .info-p {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #475569;
+        }
+
+        .score-display {
+            background: #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .score-num {
+            font-size: 24px;
+            color: #1e3a8a;
+            display: block;
+        }
+
+        .bar-bg {
+            background: #cbd5e1;
+            height: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            background: #2563eb;
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s;
+        }
+
+        .error {
+            color: #b91c1c;
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Main Coaching Header -->
+        <div class="header">
+            <h1>SUN SHINE COACHING ACADEMY</h1>
+            <p>Student Examination Portal</p>
+        </div>
+
+        <!-- Search Form Block -->
+        <div class="input-box">
+            <label>ENTER STUDENT ROLL NO (1-20):</label>
+            <input type="number" id="rollInput" placeholder="e.g. 1" min="1" max="20">
+        </div>
+        <button type="button" onclick="searchResult();" class="btn">Check Score</button>
+
+        <!-- Record Error Message Box -->
+        <div id="errorAlert" class="error">
+            Roll Number Not Found! Enter 1 to 20.
+        </div>
+
+        <!-- Scorecard Output Result Data Layout -->
+        <div id="resultCard" class="result-box">
+            <div id="resSubject" style="font-size: 11px; font-weight: bold; color: #2563eb;">TEST RESULT</div>
+            <div id="resName" class="student-title">--</div>
+            <p class="info-p">Father's Name: <strong id="resFather" style="color:#0f172a;">--</strong></p>
+            <p class="info-p">Class Group: <strong id="resClass" style="color:#0f172a;">--</strong></p>
+            <p class="info-p">Roll Number: <strong id="resRoll" style="color:#1e3a8a;">--</strong></p>
+
+            <div class="score-display">
+                Obtained Marks: <span id="resObtained" class="score-num">0</span> / <span id="resTotal">90</span>
+                <div style="margin-top: 8px; font-size: 13px;">Percentage: <span id="resPerc"
+                        style="color:#2563eb;">0%</span></div>
+                <div class="bar-bg">
+                    <div id="resProgressBar" class="bar-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT AUTOMATION LOGIC ENGINE -->
+    <script>
+        const CURRENT_TEST = {
+            subject: "English Class Test",
+            totalMarks: 90 // Out of 90 marks configuration                 
+        };
+
+        // Exact 20 Students Database Mapping from Excel Sheet
+        const resultDatabase = {
+            "1": { name: "ayush yadav", father: "Mr.Vikash Yadav", class: "Class 4", marks: 89 },
+            "2": { name: "Harsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 50 },
+            "3": { name: "Disha Yadav", father: "Mr.Sahablal Yadav", class: "Class 2", marks: 60 },
+            "4": { name: "Peehoo Yadav", father: "Mr.Dharmendra Yadav", class: "Class 2", marks: 0 },
+            "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2", marks: 0 },
+            "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2", marks: 0 },
+            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 0 },
+            "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5", marks: 0 },
+            "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4", marks: 0 },
+            "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 0 },
+            "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 0 },
+            "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5", marks: 0 },
+            "13": { name: "ashish yadav", father: "Mr Ashok yadav", class: "Class 4", marks: 0 },
+            "14": { name: "ritwik pal", father: "Mr pankaj pal", class: "Class 2", marks: 0 },
+            "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7", marks: 0 },
+            "16": { name: "Ayush Yadav", father: "N/A", class: "Class N/A", marks: 0 },
+            "17": { name: "Hemant kumar", father: "Mr chandrabhusan", class: "Class 5", marks: 12 },
+            "18": { name: "Aditi Yadav", father: "Mr.Ashok yadav", class: "Class 5", marks: 24 },
+            "19": { name: "Styam yadav", father: "N/A", class: "Class 3", marks: 0 },
+            "20": { name: "Shivangi yadav", father: "N/A", class: "Class 1", marks: 23 }
+        };
+
+        function searchResult() {
+            const rollInput = document.getElementById('rollInput');
+            const roll = rollInput.value.trim();
+            const card = document.getElementById('resultCard');
+            const error = document.getElementById('errorAlert');
+
+            // Reset UI Layout Views
+            card.style.display = 'none';
+            error.style.display = 'none';
+
+            if (!roll) {
+                alert("Please type a Roll Number first!");
+                return;
+            }
+
+            if (resultDatabase[roll]) {
+                const student = resultDatabase[roll];
+
+                // Inject Text Content
+                document.getElementById('resName').innerText = student.name;
+                document.getElementById('resRoll').innerText = roll;
+                document.getElementById('resFather').innerText = student.father || "N/A";
+                document.getElementById('resClass').innerText = student.class || "N/A";
+
+                const scoreObtained = Number(student.marks) || 0;
+                const scoreMax = Number(CURRENT_TEST.totalMarks) || 90;
+
+                document.getElementById('resSubject').innerText = CURRENT_TEST.subject.toUpperCase();
+                document.getElementById('resTotal').innerText = scoreMax;
+                document.getElementById('resObtained').innerText = scoreObtained;
+
+                // Absolute Calculation Processing
+                let formulaPercentage = 0;
+                if (scoreMax > 0) {
+                    formulaPercentage = (scoreObtained / scoreMax) * 100;
+                }
+
+                const finalRoundedPerc = Math.round(formulaPercentage);
+
+                // Set UI Display Outputs
+                document.getElementById('resPerc').innerText = finalRoundedPerc + "%";
+                document.getElementById('resProgressBar').style.width = finalRoundedPerc + "%";
+
+                // Show Report Card Box
+                card.style.display = 'block';
+            } else {
+                // Show Error Block
+                error.style.display = 'block';
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
