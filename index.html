@@ -6,6 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sun Shine Coaching Academy - Portal</title>
     <style>
+        .toppers-section {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .toppers-section h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .topper-card {
+            background: white;
+            margin-bottom: 15px;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .topper-card img {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fbbf24;
+            margin: 10px 0;
+        }
+
+        .topper-card h3 {
+            font-size: 20px;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .topper-card p {
+            margin: 5px 0;
+        }
+
+        .position {
+            font-size: 18px;
+            font-weight: bold;
+            color: #b45309;
+        }
+
+        .topper-card strong {
+            display: block;
+            margin-top: 8px;
+            font-size: 18px;
+        }
+
+        .percentage {
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .first {
+            border: 2px solid #fbbf24;
+        }
+
+        .second {
+            border: 2px solid #94a3b8;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -154,6 +220,39 @@
             </div>
         </div>
     </div>
+
+    <!-- TOPPERS SECTION -->
+    <div class="toppers-section">
+        <h2>🏆 TEST TOPPERS 🏆</h2>
+
+        <div class="topper-card first">
+            <div class="position">🥇 1st Position</div>
+            <img src="images/pari.jpg" alt="Pari">
+            <h3>PARI</h3>
+            <p>Class 4th</p>
+            <strong>90 / 90 Marks</strong>
+            <p class="percentage">100%</p>
+        </div>
+
+        <div class="topper-card first">
+            <div class="position">🥇 1st Position</div>
+            <img src="images/rakesh.jpg" alt="Rakesh Yadav">
+            <h3>RAKESH YADAV</h3>
+            <p>Class 4th</p>
+            <strong>90 / 90 Marks</strong>
+            <p class="percentage">100%</p>
+        </div>
+
+        <div class="topper-card second">
+            <div class="position">🥈 2nd Position</div>
+            <img src="images/aman.jpg" alt="Aman">
+            <h3>AMAN</h3>
+            <p>Class 4th</p>
+            <strong>86 / 90 Marks</strong>
+            <p class="percentage">96%</p>
+        </div>
+    </div>
+
     <script>
         const totalMarks = 90;
         const resultDatabase = {
@@ -163,12 +262,12 @@
             "4": { name: "Peehoo Yadav", father: "Mr.Dharmendra Yadav", class: "Class 2nd", marks: 88 },
             "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2nd", marks: 55 },
             "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2nd", marks: 0 },
-            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4th", marks: 40 },
+            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4th", marks: 0 },
             "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5th", marks: 0 },
             "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 0 },
             "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 0 },
             "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 0 },
-            "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5th", marks:0 },
+            "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5th", marks: 0 },
             "13": { name: "ashish yadav", father: "Mr Ashok yadav", class: "Class 4th", marks: 0 },
             "14": { name: "ritwik pal", father: "Mr pankaj pal", class: "Class 2nd", marks: 0 },
             "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7th", marks: 0 },
@@ -178,7 +277,7 @@
             "19": { name: "Styam yadav", father: "Mr.Satishchandra", class: "Class 3rd", marks: 0 },
             "20": { name: "pari", father: "Mr.Rmesh yadav", class: "Class 4th", marks: 90 },
             "21": { name: "rakesh yadav", father: "Mr.Chnadresh yadav", class: "Class 4th", marks: 90 },
-            "22": { name: "ansh", father: "Mr.Jiledar yadav", class: "Class 4th", marks: 65 },
+            "22": { name: "ansh", father: "Mr.Jiledar yadav", class: "Class 4th", marks: 15 },
             "23": { name: "Krishna", father: "N/A", class: "Class 4th", marks: 0 },
             "24": { name: "Lakshy yadav", father: "N/A", class: "Class 4th", marks: 0 },
             "25": { name: "aman", father: "N/A", class: "Class 4th", marks: 86 },
@@ -193,8 +292,14 @@
             const rollInput = document.getElementById("rollInput").value.trim();
             const errorAlert = document.getElementById("errorAlert");
             const resultCard = document.getElementById("resultCard");
-            errorAlert.style.display = "none"; resultCard.style.display = "none";
-            if (rollInput === "" || isNaN(rollInput) || !resultDatabase[rollInput]) { errorAlert.style.display = "block"; return; }
+            errorAlert.style.display = "none";
+            resultCard.style.display = "none";
+
+            if (rollInput === "" || isNaN(rollInput) || !resultDatabase[rollInput]) {
+                errorAlert.style.display = "block";
+                return;
+            }
+
             const student = resultDatabase[rollInput];
             const percentage = Math.round((student.marks / totalMarks) * 100);
             document.getElementById("resName").innerText = student.name.toUpperCase();
@@ -203,11 +308,13 @@
             document.getElementById("resRoll").innerText = rollInput;
             document.getElementById("resObtained").innerText = student.marks;
             document.getElementById("resPerc").innerText = percentage + "%";
+
             const progressBar = document.getElementById("resProgressBar");
             progressBar.style.width = percentage + "%";
             if (percentage < 33) progressBar.style.backgroundColor = "#b91c1c";
             else if (percentage < 60) progressBar.style.backgroundColor = "#d97706";
             else progressBar.style.backgroundColor = "#1e3a8a";
+
             resultCard.style.display = "block";
         }
     </script>
