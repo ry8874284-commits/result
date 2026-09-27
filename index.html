@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sun Shine Coaching Academy - Portal</title>
     <style>
-        /* CSS FOR STYLE - NO INTERNET REQUIRED */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -37,16 +36,6 @@
             margin-bottom: 20px;
         }
 
-        .header h1 {
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-
-        .header p {
-            color: #fbbf24;
-            font-size: 12px;
-        }
-
         .input-box {
             margin-bottom: 15px;
         }
@@ -56,7 +45,6 @@
             font-weight: bold;
             font-size: 13px;
             margin-bottom: 5px;
-            color: #334155;
         }
 
         .input-box input {
@@ -80,10 +68,6 @@
             cursor: pointer;
         }
 
-        .btn:hover {
-            background: #1d4ed8;
-        }
-
         .result-box {
             margin-top: 25px;
             padding: 15px;
@@ -96,17 +80,10 @@
         .student-title {
             font-size: 18px;
             font-weight: bold;
-            color: #0f172a;
             border-bottom: 1px solid #e2e8f0;
             padding-bottom: 5px;
             margin-bottom: 10px;
             text-transform: uppercase;
-        }
-
-        .info-p {
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #475569;
         }
 
         .score-display {
@@ -117,12 +94,6 @@
             margin-top: 15px;
             font-size: 16px;
             font-weight: bold;
-        }
-
-        .score-num {
-            font-size: 24px;
-            color: #1e3a8a;
-            display: block;
         }
 
         .bar-bg {
@@ -148,60 +119,33 @@
             border-radius: 6px;
             margin-top: 15px;
             display: none;
-            font-weight: bold;
             text-align: center;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
-    
-    <!-- PROUD TOPPER VISUAL MOTIVATION BANNER -->
-    <div style="max-width: 1000px; margin: 25px auto 0 auto; padding: 0 20px;">
-        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-            <span style="background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; border: 1px solid #fde68a;">
-                🏆 OUR PROUD TOPPER OF THE MONTH 🏆
-            </span>
-            <h2 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 8px 0 3px 0; text-transform: uppercase;">
-                AYUSH YADAV (RANK 1 - 89/90 MARKS)
-            </h2>
-            <p style="font-size: 12px; color: #64748b; font-weight: 500; margin-bottom: 12px;">
-                Honored by Director Sir for securing First Position in All subject Class Test!
-            </p>
-            <!-- यहाँ आपकी फोटो लोड होगी -->
-            <img src="topperr.jpeg" alt="Sun Shine Academy Topper" style="width: 100%; max-width: 500px; border-radius: 12px; border: 3px solid #1e3a8a; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Main Coaching Header -->
         <div class="header">
             <h1>SUN SHINE COACHING ACADEMY</h1>
             <p>Student Examination Portal</p>
         </div>
-
-        <!-- Search Form Block -->
         <div class="input-box">
             <label>ENTER STUDENT ROLL NO (1-30):</label>
-            <input type="number" id="rollInput" placeholder="e.g. 1" min="1" max="20">
+            <input type="number" id="rollInput" placeholder="e.g. 1" min="1" max="30">
         </div>
         <button type="button" onclick="searchResult();" class="btn">Check Score</button>
-
-        <!-- Record Error Message Box -->
-        <div id="errorAlert" class="error">
-            Roll Number Not Found! Enter 1 to 20.
-        </div>
-
-        <!-- Scorecard Output Result Data Layout -->
+        <div id="errorAlert" class="error">Roll Number Not Found! Enter 1 to 30.</div>
         <div id="resultCard" class="result-box">
             <div id="resSubject" style="font-size: 11px; font-weight: bold; color: #2563eb;">TEST RESULT</div>
             <div id="resName" class="student-title">--</div>
-            <p class="info-p">Father's Name: <strong id="resFather" style="color:#0f172a;">--</strong></p>
-            <p class="info-p">Class Group: <strong id="resClass" style="color:#0f172a;">--</strong></p>
-            <p class="info-p">Roll Number: <strong id="resRoll" style="color:#1e3a8a;">--</strong></p>
-
+            <p>Father's Name: <strong id="resFather">--</strong></p>
+            <p>Class Group: <strong id="resClass">--</strong></p>
+            <p>Roll Number: <strong id="resRoll">--</strong></p>
             <div class="score-display">
-                Obtained Marks: <span id="resObtained" class="score-num">0</span> / <span id="resTotal">90</span>
+                Obtained Marks: <span id="resObtained" style="font-size:24px; color:#1e3a8a; display:block;">0</span> /
+                90
                 <div style="margin-top: 8px; font-size: 13px;">Percentage: <span id="resPerc"
                         style="color:#2563eb;">0%</span></div>
                 <div class="bar-bg">
@@ -210,97 +154,63 @@
             </div>
         </div>
     </div>
-
-    <!-- JAVASCRIPT AUTOMATION LOGIC ENGINE -->
     <script>
-        const CURRENT_TEST = {
-            subject: "All Subject and Revision Test",
-            totalMarks: 90 // Out of 90 marks configuration                 
-        };
-
-        // Exact 20 Students Database Mapping from Excel Sheet
+        const totalMarks = 90;
         const resultDatabase = {
-            "1": { name: "ayush yadav", father: "Mr.Vikash Yadav", class: "Class 4", marks: 89 },
-            "2": { name: "Harsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 86 },
-            "3": { name: "Disha Yadav", father: "Mr.Sahablal Yadav", class: "Class 2", marks: 60 },
-            "4": { name: "Peehoo Yadav", father: "Mr.Dharmendra Yadav", class: "Class 2", marks: 88 },
-            "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2", marks: 55 },
-            "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2", marks: 0 },
-            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 40 },
-            "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5", marks: 0 },
-            "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4", marks: 0 },
-            "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 0 },
-            "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 0 },
-            "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5", marks: 0 },
-            "13": { name: "ashish yadav", father: "Mr Ashok yadav", class: "Class 4", marks: 0 },
-            "14": { name: "ritwik pal", father: "Mr pankaj pal", class: "Class 2", marks: 0 },
-            "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7", marks: 0 },
-            "16": { name: "Ayush Yadav", father: "N/A", class: "Class N/A", marks: 0 },
-            "17": { name: "Hemant kumar", father: "Mr chandrabhusan", class: "Class 5", marks: 0 },
-            "18": { name: "Aditi Yadav", father: "Mr.Ashok yadav", class: "Class 5", marks: 0 },
-            "19": { name: "Styam yadav", father: "N/A", class: "Class 3", marks: 0 },
-            "20": { name: "Shivangi yadav", father: "N/A", class: "Class 1", marks: 0 }
-             "21": { name: "Pari yadav", father: "Mr.Rmesh yadav ", class: "Class 4", marks: 90 }
-         "22": { name: "Rakesh yadav", father: "Mr.Chnadresh yadav", class: "Class 4", marks: 90 }
-         "26": { name: "Aman ", father: "N/A", class: "Class 4", marks: 90 }
-          "23": { name: "Ansh ", father: "Mr.Jiledar yadav ", class: "Class 4", marks: 15 }
-        
-            
+            "1": { name: "ayush yadav", father: "Mr.Vikash Yadav", class: "Class 4th", marks: 89 },
+            "2": { name: "Harsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4th", marks: 86 },
+            "3": { name: "Disha Yadav", father: "Mr.Sahablal Yadav", class: "Class 2nd", marks: 60 },
+            "4": { name: "Peehoo Yadav", father: "Mr.Dharmendra Yadav", class: "Class 2nd", marks: 88 },
+            "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2nd", marks: 55 },
+            "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2nd", marks: 45 },
+            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4th", marks: 40 },
+            "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5th", marks: 72 },
+            "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 50 },
+            "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 68 },
+            "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 58 },
+            "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5th", marks: 64 },
+            "13": { name: "ashish yadav", father: "Mr Ashok yadav", class: "Class 4th", marks: 70 },
+            "14": { name: "ritwik pal", father: "Mr pankaj pal", class: "Class 2nd", marks: 62 },
+            "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7th", marks: 75 },
+            "16": { name: "Ayush Yadav", father: "N/A", class: "Class 5th", marks: 52 },
+            "17": { name: "hemant kumar", father: "Mr chnadrabhusan", class: "Class 5th", marks: 78 },
+            "18": { name: "Aditi Yadav", father: "Mr.Ashok yadav", class: "Class 5th", marks: 80 },
+            "19": { name: "Styam yadav", father: "Mr.Satishchandra", class: "Class 3rd", marks: 67 },
+            "20": { name: "pari", father: "Mr.Rmesh yadav", class: "Class 4th", marks: 74 },
+            "21": { name: "rakesh yadav", father: "Mr.Chnadresh yadav", class: "Class 4th", marks: 55 },
+            "22": { name: "ansh", father: "Mr.Jiledar yadav", class: "Class 4th", marks: 48 },
+            "23": { name: "Aman", father: "N/A", class: "Class 4th", marks: 50 },
+            "24": { name: "Lakshy yadav", father: "N/A", class: "Class 4th", marks: 42 },
+            "25": { name: "aman", father: "N/A", class: "Class 4th", marks: 46 },
+            "26": { name: "Ashu", father: "N/A", class: "Class 4th", marks: 51 },
+            "27": { name: "avnish", father: "N/A", class: "Class 4th", marks: 49 },
+            "28": { name: "Not Assigned", father: "N/A", class: "N/A", marks: 0 },
+            "29": { name: "Not Assigned", father: "N/A", class: "N/A", marks: 0 },
+            "30": { name: "Not Assigned", father: "N/A", class: "N/A", marks: 0 }
         };
 
         function searchResult() {
-            const rollInput = document.getElementById('rollInput');
-            const roll = rollInput.value.trim();
-            const card = document.getElementById('resultCard');
-            const error = document.getElementById('errorAlert');
-
-            // Reset UI Layout Views
-            card.style.display = 'none';
-            error.style.display = 'none';
-
-            if (!roll) {
-                alert("Please type a Roll Number first!");
-                return;
-            }
-
-            if (resultDatabase[roll]) {
-                const student = resultDatabase[roll];
-
-                // Inject Text Content
-                document.getElementById('resName').innerText = student.name;
-                document.getElementById('resRoll').innerText = roll;
-                document.getElementById('resFather').innerText = student.father || "N/A";
-                document.getElementById('resClass').innerText = student.class || "N/A";
-
-                const scoreObtained = Number(student.marks) || 0;
-                const scoreMax = Number(CURRENT_TEST.totalMarks) || 90;
-
-                document.getElementById('resSubject').innerText = CURRENT_TEST.subject.toUpperCase();
-                document.getElementById('resTotal').innerText = scoreMax;
-                document.getElementById('resObtained').innerText = scoreObtained;
-
-                // Absolute Calculation Processing
-                let formulaPercentage = 0;
-                if (scoreMax > 0) {
-                    formulaPercentage = (scoreObtained / scoreMax) * 100;
-                }
-
-                const finalRoundedPerc = Math.round(formulaPercentage);
-
-                // Set UI Display Outputs
-                document.getElementById('resPerc').innerText = finalRoundedPerc + "%";
-                document.getElementById('resProgressBar').style.width = finalRoundedPerc + "%";
-
-                // Show Report Card Box
-                card.style.display = 'block';
-            } else {
-                // Show Error Block
-                error.style.display = 'block';
-            }
-
+            const rollInput = document.getElementById("rollInput").value.trim();
+            const errorAlert = document.getElementById("errorAlert");
+            const resultCard = document.getElementById("resultCard");
+            errorAlert.style.display = "none"; resultCard.style.display = "none";
+            if (rollInput === "" || isNaN(rollInput) || !resultDatabase[rollInput]) { errorAlert.style.display = "block"; return; }
+            const student = resultDatabase[rollInput];
+            const percentage = Math.round((student.marks / totalMarks) * 100);
+            document.getElementById("resName").innerText = student.name.toUpperCase();
+            document.getElementById("resFather").innerText = student.father;
+            document.getElementById("resClass").innerText = student.class;
+            document.getElementById("resRoll").innerText = rollInput;
+            document.getElementById("resObtained").innerText = student.marks;
+            document.getElementById("resPerc").innerText = percentage + "%";
+            const progressBar = document.getElementById("resProgressBar");
+            progressBar.style.width = percentage + "%";
+            if (percentage < 33) progressBar.style.backgroundColor = "#b91c1c";
+            else if (percentage < 60) progressBar.style.backgroundColor = "#d97706";
+            else progressBar.style.backgroundColor = "#1e3a8a";
+            resultCard.style.display = "block";
         }
     </script>
-
 </body>
 
 </html>
