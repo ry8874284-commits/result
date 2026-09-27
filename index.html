@@ -214,32 +214,38 @@
     <!-- JAVASCRIPT AUTOMATION LOGIC ENGINE -->
     <script>
         const CURRENT_TEST = {
-            subject: "English Class Test",
+            subject: "All Subject and Revision Test",
             totalMarks: 90 // Out of 90 marks configuration                 
         };
 
         // Exact 20 Students Database Mapping from Excel Sheet
         const resultDatabase = {
             "1": { name: "ayush yadav", father: "Mr.Vikash Yadav", class: "Class 4", marks: 89 },
-            "2": { name: "Harsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 88 },
-            "3": { name: "Disha Yadav", father: "Mr.Sahablal Yadav", class: "Class 2", marks: 48 },
+            "2": { name: "Harsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 86 },
+            "3": { name: "Disha Yadav", father: "Mr.Sahablal Yadav", class: "Class 2", marks: 60 },
             "4": { name: "Peehoo Yadav", father: "Mr.Dharmendra Yadav", class: "Class 2", marks: 88 },
-            "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2", marks: 53 },
-            "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2", marks: 23 },
-            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 32 },
-            "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5", marks: 20 },
-            "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4", marks: 64 },
-            "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 68 },
-            "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 58 },
+            "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2", marks: 55 },
+            "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2", marks: 0 },
+            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4", marks: 40 },
+            "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5", marks: 0 },
+            "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4", marks: 0 },
+            "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 0 },
+            "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class N/A", marks: 0 },
             "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5", marks: 0 },
             "13": { name: "ashish yadav", father: "Mr Ashok yadav", class: "Class 4", marks: 0 },
             "14": { name: "ritwik pal", father: "Mr pankaj pal", class: "Class 2", marks: 0 },
-            "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7", marks: 77 },
+            "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7", marks: 0 },
             "16": { name: "Ayush Yadav", father: "N/A", class: "Class N/A", marks: 0 },
-            "17": { name: "Hemant kumar", father: "Mr chandrabhusan", class: "Class 5", marks: 12 },
-            "18": { name: "Aditi Yadav", father: "Mr.Ashok yadav", class: "Class 5", marks: 24 },
-            "19": { name: "Styam yadav", father: "N/A", class: "Class 3", marks: 62 },
-            "20": { name: "Shivangi yadav", father: "N/A", class: "Class 1", marks: 23 }
+            "17": { name: "Hemant kumar", father: "Mr chandrabhusan", class: "Class 5", marks: 0 },
+            "18": { name: "Aditi Yadav", father: "Mr.Ashok yadav", class: "Class 5", marks: 0 },
+            "19": { name: "Styam yadav", father: "N/A", class: "Class 3", marks: 0 },
+            "20": { name: "Shivangi yadav", father: "N/A", class: "Class 1", marks: 0 }
+             "21": { name: "Pari yadav", father: "Mr.Rmesh yadav ", class: "Class 4", marks: 90 }
+         "21": { name: "Rakesh yadav", father: "Mr.Chnadresh yadav", class: "Class 4", marks: 90 }
+         "26": { name: "Aman ", father: "N/A", class: "Class 4", marks: 90 }
+          "23": { name: "Ansh ", father: "Mr.Jiledar yadav ", class: "Class 4", marks: 15 }
+        
+            
         };
 
         function searchResult() {
