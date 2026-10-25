@@ -1,30 +1,218 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sun Shine Coaching Academy - Portal</title>
+
+    <title>Sun Shine Coaching Academy - Result Portal</title>
+
     <style>
-        .toppers-section {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            padding: 15px;
+            color: #1e293b;
+        }
+
+        /* Academy Image */
+        .academy-image {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 10px auto 20px;
+            border-radius: 12px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 22px 12px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            line-height: 1.4;
+        }
+
+        .header p {
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        .input-box {
+            margin-bottom: 15px;
+        }
+
+        .input-box label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 17px;
+        }
+
+        .btn {
+            width: 100%;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 13px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+        }
+
+        /* Error Message */
+        .error {
+            color: #b91c1c;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 12px;
+            border-radius: 7px;
+            margin-top: 15px;
+            display: none;
+            text-align: center;
+        }
+
+        /* Result Card */
+        .result-box {
             margin-top: 25px;
+            padding: 18px;
+            border: 2px solid #1e3a8a;
+            border-radius: 10px;
+            background: #f8fafc;
+            display: none;
+        }
+
+        .result-heading {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .student-title {
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            overflow-wrap: anywhere;
+        }
+
+        .student-info p {
+            margin: 11px 0;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .score-display {
+            background: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .marks {
+            font-size: 28px;
+            color: #1e3a8a;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .percentage {
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .bar-bg {
+            background: #cbd5e1;
+            height: 13px;
+            border-radius: 10px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            background: #2563eb;
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .result-message {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+
+        /* Toppers Section */
+        .toppers-section {
+            max-width: 900px;
+            margin: 30px auto;
             padding: 20px;
             background: #f8fafc;
-            border-radius: 12px;
+            border-radius: 15px;
             text-align: center;
         }
 
         .toppers-section h2 {
             color: #1e3a8a;
             margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .topper-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
         }
 
         .topper-card {
             background: white;
-            margin-bottom: 15px;
-            padding: 18px;
+            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
 
         .topper-card img {
@@ -33,17 +221,17 @@
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid #fbbf24;
-            margin: 10px 0;
+            margin: 12px auto;
         }
 
         .topper-card h3 {
-            font-size: 20px;
+            font-size: 19px;
             color: #1e3a8a;
-            margin-bottom: 5px;
+            margin: 8px 0;
         }
 
         .topper-card p {
-            margin: 5px 0;
+            margin: 7px 0;
         }
 
         .position {
@@ -52,16 +240,17 @@
             color: #b45309;
         }
 
-        .topper-card strong {
-            display: block;
-            margin-top: 8px;
-            font-size: 18px;
+        .topper-marks {
+            font-weight: bold;
+            font-size: 17px;
+            margin-top: 10px;
         }
 
-        .percentage {
+        .topper-percentage {
             color: #2563eb;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 17px;
+            margin-top: 8px;
         }
 
         .first {
@@ -72,263 +261,477 @@
             border: 2px solid #94a3b8;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
+        .third {
+            border: 2px solid #cd7f32;
         }
 
-        body {
-            background-color: #f1f5f9;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 30px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header {
-            background: #1e3a8a;
-            color: white;
+        .footer {
             text-align: center;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .input-box {
-            margin-bottom: 15px;
-        }
-
-        .input-box label {
-            display: block;
-            font-weight: bold;
+            padding: 20px 10px;
+            color: #64748b;
             font-size: 13px;
-            margin-bottom: 5px;
         }
 
-        .input-box input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-        }
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
 
-        .btn {
-            width: 100%;
-            background: #1e3a8a;
-            color: white;
-            border: none;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+            .container {
+                padding: 15px;
+            }
 
-        .result-box {
-            margin-top: 25px;
-            padding: 15px;
-            border: 2px solid #1e3a8a;
-            border-radius: 8px;
-            background: #f8fafc;
-            display: none;
-        }
+            .header h1 {
+                font-size: 21px;
+            }
 
-        .student-title {
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
+            .toppers-section {
+                padding: 12px;
+            }
 
-        .score-display {
-            background: #e2e8f0;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .bar-bg {
-            background: #cbd5e1;
-            height: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .bar-fill {
-            background: #2563eb;
-            height: 100%;
-            width: 0%;
-            transition: width 0.4s;
-        }
-
-        .error {
-            color: #b91c1c;
-            background: #fef2f2;
-            border: 1px solid #fee2e2;
-            padding: 12px;
-            border-radius: 6px;
-            margin-top: 15px;
-            display: none;
-            text-align: center;
-            font-weight: bold;
+            .toppers-section h2 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <img src="grp.jpeg.jpeg">alt="grp">
 
+    <!-- Academy Image: Keep grp.jpeg.jpeg in the same folder -->
+    <img src="grp.jpeg.jpeg" alt="Sun Shine Coaching Academy"
+         class="academy-image"
+         onerror="this.style.display='none'">
+
+    <!-- Main Result Portal -->
     <div class="container">
+
         <div class="header">
             <h1>SUN SHINE COACHING ACADEMY</h1>
-            <p>Student Examination Portal</p>
+            <p>Student Examination Result Portal</p>
+            <p>Learn Today, Lead Tomorrow!</p>
         </div>
+
         <div class="input-box">
-            <label>ENTER STUDENT ROLL NO (1-30):</label>
-            <input type="number" id="rollInput" placeholder="e.g. 1" min="1" max="30">
+            <label for="rollInput">ENTER STUDENT ROLL NUMBER (1-30):</label>
+
+            <input
+                type="number"
+                id="rollInput"
+                placeholder="Enter your roll number"
+                min="1"
+                max="30"
+                onkeydown="if(event.key === 'Enter') searchResult()">
         </div>
-        <button type="button" onclick="searchResult();" class="btn">Check Score</button>
-        <div id="errorAlert" class="error">Roll Number Not Found! Enter 1 to 30.</div>
+
+        <button type="button" onclick="searchResult()" class="btn">
+            CHECK RESULT
+        </button>
+
+        <div id="errorAlert" class="error" role="alert">
+            Roll Number Not Found! Please enter a number from 1 to 30.
+        </div>
+
+        <!-- Result Display -->
         <div id="resultCard" class="result-box">
-            <div id="resSubject" style="font-size: 11px; font-weight: bold; color: #2563eb;">TEST RESULT</div>
+
+            <div class="result-heading">📋 TEST RESULT</div>
+
             <div id="resName" class="student-title">--</div>
-            <p>Father's Name: <strong id="resFather">--</strong></p>
-            <p>Class Group: <strong id="resClass">--</strong></p>
-            <p>Roll Number: <strong id="resRoll">--</strong></p>
+
+            <div class="student-info">
+                <p>Father's Name: <strong id="resFather">--</strong></p>
+                <p>Class: <strong id="resClass">--</strong></p>
+                <p>Roll Number: <strong id="resRoll">--</strong></p>
+            </div>
+
             <div class="score-display">
-                Obtained Marks: <span id="resObtained" style="font-size:24px; color:#1e3a8a; display:block;">56</span> /
-                56
-                <div style="margin-top: 8px; font-size: 13px;">Percentage: <span id="resPerc"
-                        style="color:#2563eb;">0%</span></div>
+
+                <p>Obtained Marks</p>
+
+                <div class="marks">
+                    <span id="resObtained">0</span> /
+                    <span id="resTotal">56</span>
+                </div>
+
+                <div class="percentage">
+                    Percentage: <span id="resPerc">0%</span>
+                </div>
+
                 <div class="bar-bg">
                     <div id="resProgressBar" class="bar-fill"></div>
                 </div>
+
+                <div id="resMessage" class="result-message"></div>
+
             </div>
         </div>
     </div>
-     <!-- TOPPERS SECTION -->
-        <div class="toppers-section">
-            <h2>🏆GROUP 2 TEST TOPPERS 🏆</h2>
+
+    <!-- TOPPERS SECTION -->
+    <div class="toppers-section">
+
+        <h2>🏆 GROUP 2 TEST TOPPERS 🏆</h2>
+
+        <div class="topper-list">
 
             <div class="topper-card first">
-                <div class="position">🥇 1st Position</div>
-                <img src="ayush.jpeg.jpeg" alt="AYUSH YADAV">
-                <h3>AYUSH YADAV(1)</h3>
+                <div class="position">🥇 TOP PERFORMANCE</div>
+                <img src="ayush.jpeg.jpeg" alt="Ayush Yadav"
+                     onerror="this.style.display='none'">
+                <h3>AYUSH YADAV (1)</h3>
                 <p>Class 4th</p>
-                <strong>54/ 56 Marks</strong>
-                <p class="percentage">86%</p>
+                <div class="topper-marks">54 / 56 Marks</div>
+                <p class="topper-percentage">96.43%</p>
             </div>
-              <div class="topper-card first">
-                <div class="position">🥇 1st Position</div>
-                  <p>HINDI MEDIUM</p>
-                <img src="" alt="AMAN YADAV">
+
+            <div class="topper-card first">
+                <div class="position">🥇 HINDI MEDIUM</div>
+                <p>HINDI MEDIUM</p>
+                <img src="" alt="Aman Yadav"
+                     onerror="this.style.display='none'">
                 <h3>AMAN YADAV</h3>
                 <p>Class 5th</p>
-                <strong>51.8/ 56 Marks</strong>
-                <p class="percentage">92%</p>
-            </div>
-
-            <div class="topper-card first">
-                <div class="position">2nd Position</div>
-                <img src="ayush.jpeg.jpeg" alt="ANSH YADAV">
-                <h3>ANSH YADAV </h3>
-                <p>Class 7th</p>
-                <strong>48 / 56 Marks</strong>
-                <p class="percentage">76.25%</p>
+                <div class="topper-marks">51.8 / 56 Marks</div>
+                <p class="topper-percentage">92.50%</p>
             </div>
 
             <div class="topper-card second">
-                <div class="position"> 🥉 3rd Position</div>
-                <img src="harsh.jpge.jpeg" alt="HARSH YADAV">
-                <h3>HARSH YADAV </h3>
-                <p>Class 4th</p>
-                <strong>45 / 56 Marks</strong>
-                <p class="percentage">73.25%</p>
+                <div class="position">🥈 2nd Position</div>
+                <img src="ayush.jpeg.jpeg" alt="Ansh Yadav"
+                     onerror="this.style.display='none'">
+                <h3>ANSH YADAV</h3>
+                <p>Class 7th</p>
+                <div class="topper-marks">48 / 56 Marks</div>
+                <p class="topper-percentage">85.71%</p>
             </div>
+
+            <div class="topper-card third">
+                <div class="position">🥉 3rd Position</div>
+                <img src="harsh.jpge.jpeg" alt="Harsh Yadav"
+                     onerror="this.style.display='none'">
+                <h3>HARSH YADAV</h3>
+                <p>Class 4th</p>
+                <div class="topper-marks">45 / 56 Marks</div>
+                <p class="topper-percentage">80.36%</p>
+            </div>
+
         </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 Sun Shine Coaching Academy</p>
+        <p>Education is the key to success!</p>
+    </div>
 
     <script>
+        // Total marks for this test
         const totalMarks = 56;
+
+        // Student Result Database
         const resultDatabase = {
-            "1": { name: "ayush yadav", father: "Mr.Vikash Yadav", class: "Class 4th", marks: 54.5 },
-            "2": { name: "Harsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4th", marks: 45 },
-            "3": { name: "Disha Yadav", father: "Mr.Sahablal Yadav", class: "Class 2nd", marks: 0 },
-            "4": { name: "Peehoo Yadav", father: "Mr.Dharmendra Yadav", class: "Class 2nd", marks: 47.6 },
-            "5": { name: "Saurya Yadav", father: "Mr. Vikash Yadav", class: "Class 2nd", marks: 42 },
-            "6": { name: "Shivansh Yadav", father: "Mr.nilesh yadav", class: "Class 2nd", marks:52  },
-            "7": { name: "Aadarsh Yadav", father: "Mr.Sahablal Yadav", class: "Class 4th", marks: 0 },
-            "8": { name: "SHIV RAJ YADAV", father: "Mr.Umesh yadav", class: "Class 5th", marks: 43 },
-            "9": { name: "ayush yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 37.5 },
-            "10": { name: "arpit yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 44.5 },
-            "11": { name: "Anurag yadav", father: "Mr. Vivek yadav", class: "Class 4th", marks: 0 },
-            "12": { name: "rishabh pal", father: "Mr pankaj pal", class: "Class 5th", marks: 22.4 },
-            "13": { name: "ashish yadav", father: "Mr Ashok yadav", class: "Class 4th", marks: 0 },
-            "14": { name: "priyal pal", father: "n/a", class: "Class 2nd", marks: 43 },
-            "15": { name: "aryan yadav", father: "Mr.Guddu", class: "Class 7th", marks: 37.5 },
-            "16": { name: "PARI SINGH ", father: "MR Rahul kumar", class: "Class 4th", marks: 34GVB NMP-LKJO0TFR5 },
-            "17": { name: "YASH  SINGH", father: "MR Ratan", class: "Class 3rd", marks: 47.6 },
-            "18": { name: "Aditi Yadav", father: "Mr.Ashok yadav", class: "Class 5th", marks: 0 },
-            "19": { name: "EKTA SINGH", father: "MR Rahul kumar", class: "Class PG", marks: 50 },
-            "20": { name: "pari", father: "Mr.Rmesh yadav", class: "Class 4th", marks: 44.6 },
-            "21": { name: "rakesh yadav", father: "Mr.Chnadresh yadav", class: "Class 4th", marks: 58 },
-            "22": { name: "ansh", father: "Mr.Jiledar yadav", class: "Class 4th", marks: 37 },
-            "23": { name: "ansh yadav", father: "kamlesh", class: "Class 7th", marks: 48 },
-            "24": { name: "VANSH yadav", father: "N/A", class: "Class 2th", marks: 42},
-            "25": { name: "aman", father: "N/A", class: "Class 4th", marks: 51.8 },
-            "26": { name: "VEDANSH YADAV", father: "MR INDAL YADAV ", class: "Class PG", marks: 36 },
-            "27": { name: "avnish", father: "N/A", class: "Class 4th", marks: 23 },
-            "28": { name: "aditya", father: "Mr javahar lal", class: "5", marks: 32 },
-            "29": { name: "sandhya", father: "N/A", class: "1", marks: 45 },
-            "30": { name: "Aarav Yadav ", father: "Mr.Sarvesh Yadav", class: "2", marks: 32.2 };
 
-        }
+            "1": {
+                name: "Ayush Yadav",
+                father: "Mr. Vikash Yadav",
+                class: "Class 4th",
+                marks: 54.5
+            },
 
+            "2": {
+                name: "Harsh Yadav",
+                father: "Mr. Sahablal Yadav",
+                class: "Class 4th",
+                marks: 45
+            },
+
+            "3": {
+                name: "Disha Yadav",
+                father: "Mr. Sahablal Yadav",
+                class: "Class 2nd",
+                marks: 0
+            },
+
+            "4": {
+                name: "Peehoo Yadav",
+                father: "Mr. Dharmendra Yadav",
+                class: "Class 2nd",
+                marks: 47.6
+            },
+
+            "5": {
+                name: "Saurya Yadav",
+                father: "Mr. Vikash Yadav",
+                class: "Class 2nd",
+                marks: 42
+            },
+
+            "6": {
+                name: "Shivansh Yadav",
+                father: "Mr. Nilesh Yadav",
+                class: "Class 2nd",
+                marks: 52
+            },
+
+            "7": {
+                name: "Aadarsh Yadav",
+                father: "Mr. Sahablal Yadav",
+                class: "Class 4th",
+                marks: 0
+            },
+
+            "8": {
+                name: "Shiv Raj Yadav",
+                father: "Mr. Umesh Yadav",
+                class: "Class 5th",
+                marks: 43
+            },
+
+            "9": {
+                name: "Ayush Yadav",
+                father: "Mr. Vivek Yadav",
+                class: "Class 4th",
+                marks: 37.5
+            },
+
+            "10": {
+                name: "Arpit Yadav",
+                father: "Mr. Vivek Yadav",
+                class: "Class 4th",
+                marks: 44.5
+            },
+
+            "11": {
+                name: "Anurag Yadav",
+                father: "Mr. Vivek Yadav",
+                class: "Class 4th",
+                marks: 0
+            },
+
+            "12": {
+                name: "Rishabh Pal",
+                father: "Mr. Pankaj Pal",
+                class: "Class 5th",
+                marks: 22.4
+            },
+
+            "13": {
+                name: "Ashish Yadav",
+                father: "Mr. Ashok Yadav",
+                class: "Class 4th",
+                marks: 0
+            },
+
+            "14": {
+                name: "Priyal Pal",
+                father: "N/A",
+                class: "Class 2nd",
+                marks: 43
+            },
+
+            "15": {
+                name: "Aryan Yadav",
+                father: "Mr. Guddu",
+                class: "Class 7th",
+                marks: 37.5
+            },
+
+            "16": {
+                name: "Pari Singh",
+                father: "Mr. Rahul Kumar",
+                class: "Class 4th",
+                marks: 34
+            },
+
+            "17": {
+                name: "Yash Singh",
+                father: "Mr. Ratan",
+                class: "Class 3rd",
+                marks: 47.6
+            },
+
+            "18": {
+                name: "Aditi Yadav",
+                father: "Mr. Ashok Yadav",
+                class: "Class 5th",
+                marks: 0
+            },
+
+            "19": {
+                name: "Ekta Singh",
+                father: "Mr. Rahul Kumar",
+                class: "Class PG",
+                marks: 50
+            },
+
+            "20": {
+                name: "Pari",
+                father: "Mr. Ramesh Yadav",
+                class: "Class 4th",
+                marks: 44.6
+            },
+
+            "21": {
+                name: "Rakesh Yadav",
+                father: "Mr. Chandresh Yadav",
+                class: "Class 4th",
+                marks: 58
+            },
+
+            "22": {
+                name: "Ansh",
+                father: "Mr. Jiledar Yadav",
+                class: "Class 4th",
+                marks: 37
+            },
+
+            "23": {
+                name: "Ansh Yadav",
+                father: "Mr. Kamlesh",
+                class: "Class 7th",
+                marks: 48
+            },
+
+            "24": {
+                name: "Vansh Yadav",
+                father: "N/A",
+                class: "Class 2nd",
+                marks: 42
+            },
+
+            "25": {
+                name: "Aman",
+                father: "N/A",
+                class: "Class 4th",
+                marks: 51.8
+            },
+
+            "26": {
+                name: "Vedansh Yadav",
+                father: "Mr. Indal Yadav",
+                class: "Class PG",
+                marks: 36
+            },
+
+            "27": {
+                name: "Avnish",
+                father: "N/A",
+                class: "Class 4th",
+                marks: 23
+            },
+
+            "28": {
+                name: "Aditya",
+                father: "Mr. Jawahar Lal",
+                class: "Class 5th",
+                marks: 32
+            },
+
+            "29": {
+                name: "Sandhya",
+                father: "N/A",
+                class: "Class 1st",
+                marks: 45
+            },
+
+            "30": {
+                name: "Aarav Yadav",
+                father: "Mr. Sarvesh Yadav",
+                class: "Class 2nd",
+                marks: 32.2
+            }
+
+        };
+
+        // Search Student Result
         function searchResult() {
-            const rollInput = document.getElementById("rollInput").value.trim();
+
+            const rollInput = document
+                .getElementById("rollInput")
+                .value.trim();
+
             const errorAlert = document.getElementById("errorAlert");
             const resultCard = document.getElementById("resultCard");
+
+            // Hide previous messages and results
             errorAlert.style.display = "none";
             resultCard.style.display = "none";
 
-            if (rollInput === "" || isNaN(rollInput) || !resultDatabase[rollInput]) {
+            // Validate roll number
+            if (
+                rollInput === "" ||
+                !Number.isInteger(Number(rollInput)) ||
+                !resultDatabase[rollInput]
+            ) {
+                errorAlert.textContent =
+                    "Roll Number Not Found! Please enter a number from 1 to 30.";
+
                 errorAlert.style.display = "block";
                 return;
             }
 
+            // Get student data
             const student = resultDatabase[rollInput];
-            const percentage = Math.round((student.marks / totalMarks) * 100);
-            document.getElementById("resName").innerText = student.name.toUpperCase();
-            document.getElementById("resFather").innerText = student.father;
-            document.getElementById("resClass").innerText = student.class;
-            document.getElementById("resRoll").innerText = rollInput;
-            document.getElementById("resObtained").innerText = student.marks;
-            document.getElementById("resPerc").innerText = percentage + "%";
 
+            // Calculate percentage without allowing invalid values
+            const percentage = (student.marks / totalMarks) * 100;
+
+            // Display student details
+            document.getElementById("resName").textContent =
+                student.name.toUpperCase();
+
+            document.getElementById("resFather").textContent =
+                student.father;
+
+            document.getElementById("resClass").textContent =
+                student.class;
+
+            document.getElementById("resRoll").textContent =
+                rollInput;
+
+            document.getElementById("resObtained").textContent =
+                student.marks;
+
+            document.getElementById("resTotal").textContent =
+                totalMarks;
+
+            document.getElementById("resPerc").textContent =
+                percentage.toFixed(2) + "%";
+
+            // Update progress bar, capped at 100%
             const progressBar = document.getElementById("resProgressBar");
-            progressBar.style.width = percentage + "%";
-            if (percentage < 33) progressBar.style.backgroundColor = "#b91c1c";
-            else if (percentage < 60) progressBar.style.backgroundColor = "#d97706";
-            else progressBar.style.backgroundColor = "#1e3a8a";
 
+            progressBar.style.width =
+                Math.max(0, Math.min(100, percentage)) + "%";
+
+            // Set progress bar color and message
+            const resultMessage = document.getElementById("resMessage");
+
+            if (student.marks < totalMarks * 0.33) {
+                progressBar.style.backgroundColor = "#dc2626";
+                resultMessage.textContent = "Keep Practicing! You Can Improve.";
+                resultMessage.style.color = "#b91c1c";
+            } else if (percentage < 60) {
+                progressBar.style.backgroundColor = "#d97706";
+                resultMessage.textContent = "Good Effort! Keep Working Hard.";
+                resultMessage.style.color = "#b45309";
+            } else {
+                progressBar.style.backgroundColor = "#16a34a";
+                resultMessage.textContent = "Excellent Work! Keep It Up!";
+                resultMessage.style.color = "#15803d";
+            }
+
+            // Show result
             resultCard.style.display = "block";
+
+            // Scroll result into view
+            resultCard.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
         }
     </script>
-</body>
 
+</body>
 </html>
+```
